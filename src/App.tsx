@@ -12,16 +12,17 @@ function App() {
   const [products, setProducts] = useState<Product[]>();
   const [inputs, setInputs] = useState({ name: "", brand: "", price: 0 });
   useEffect(() => {
-    fetch("https://classy-dusk-90355f.netlify.app/").then((result) => {
+    fetch("http://localhost:3001/product").then((result) => {
       result.json().then((data: Product[]) => {
         setProducts(data);
+        console.log(data);
       });
     });
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch("https://classy-dusk-90355f.netlify.app/", {
+    fetch("http://localhost:3001/product", {
       method: "POST",
       body: JSON.stringify({ ...inputs, price: Number(inputs.price) }),
       headers: {
@@ -64,7 +65,6 @@ function App() {
                   <p>{product.name}</p>
                   <p>{product.brand}</p>
                   <p>{product.price}</p>
-                  {/* <button onClick={handleDelete}>Delete</button> */}
                 </div>
               </div>
             </div>
